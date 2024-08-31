@@ -1,8 +1,9 @@
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-
+import { useSelector } from "react-redux";
 export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
@@ -22,15 +23,25 @@ export default function Header() {
         </form>
         <ul className="flex gap-4">
           <Link to="/">
-            <li className="hidden sm:inline"><Button sx={{ color: "#334155" }}>Home</Button></li>
+            <li className="hidden sm:inline">
+              <Button sx={{ color: "#334155" }}>Home</Button>
+            </li>
           </Link>
           <Link to="/about">
-            <li className="hidden sm:inline"><Button sx={{ color: "#334155" }}>About</Button></li>
+            <li className="hidden sm:inline">
+              <Button sx={{ color: "#334155" }}>About</Button>
+            </li>
           </Link>
-          <Link to="/sign-in">
-            <li className="hidden sm:inline"><Button variant="contained" sx={{ background: "#334155" }}>
-              Sign In
-            </Button></li>
+          <Link to="/profile">
+            {currentUser ? (
+              <img className="rounded-full h-9 w-9 object-cover" src={currentUser.avatar} alt="profile" />
+            ) : (
+              <li className="hidden sm:inline">
+                <Button variant="contained" sx={{ background: "#334155" }}>
+                  Sign In
+                </Button>
+              </li>
+            )}
           </Link>
         </ul>
       </div>
