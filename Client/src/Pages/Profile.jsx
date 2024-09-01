@@ -55,7 +55,7 @@ export default function Profile() {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setFilePerc(Math.round(progress));
       },
-      (error) => {
+      () => {
         setFileUploadError(true);
       },
       () => {
@@ -121,7 +121,7 @@ export default function Profile() {
         return;
       }
       dispatch(deleteUserSuccess(data));
-    } catch (error) {
+    } catch (data) {
       dispatch(deleteUserFailure(data.message));
     }
   };
@@ -154,7 +154,7 @@ export default function Profile() {
       }
 
       setUserListings(data);
-    } catch (error) {
+    } catch {
       setShowListingsError(true);
     }
   };
